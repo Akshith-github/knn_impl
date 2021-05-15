@@ -11,7 +11,7 @@ from random import randint
 
 #dataset 
 base_loc = os.path.join(os.path.dirname(__file__), os.path.join('data'))
-us_canada_user_rating_pivot = pd.read_csv(base_loc+"\\us_canada_user_rating_pivot.csv")
+us_canada_user_rating_pivot = pd.read_csv(base_loc+"/us_canada_user_rating_pivot.csv")
 us_canada_user_rating_pivot.set_index("bookTitle",inplace = True)
 us_canada_user_rating_matrix = csr_matrix(us_canada_user_rating_pivot.values)
 #demo test_case
@@ -44,16 +44,16 @@ if __name__ == '__main__':
     # Its important to use binary mode
     # 
     model_loc = os.path.join(os.path.dirname(__file__), os.path.join('models')) 
-    knnPickle = open(model_loc+'\\knnpickle_file', 'wb') 
+    knnPickle = open(model_loc+'/knnpickle_file', 'wb') 
     # source, destination 
     pickle.dump(model_knn, knnPickle)                      
     knnPickle.close()
     # load the model from disk
-    loaded_model = pickle.load(open(model_loc+'\\knnpickle_file', 'rb'))
+    loaded_model = pickle.load(open(model_loc+'/knnpickle_file', 'rb'))
     #test the models output
     test_model_output(loaded_model)
 
     ## save using joblib library
-    joblib.dump(model_knn , model_loc+'\\model_knn.pkl')
-    modelknn_loaded = joblib.load( model_loc+'\\model_knn.pkl' , mmap_mode ='r')
+    joblib.dump(model_knn , model_loc+'/model_knn.pkl')
+    modelknn_loaded = joblib.load( model_loc+'/model_knn.pkl' , mmap_mode ='r')
     test_model_output(modelknn_loaded)

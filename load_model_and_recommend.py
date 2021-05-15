@@ -16,9 +16,9 @@ from knn_model_build import test_model_output
 # print(__file__)
 #dataset 
 base_loc = os.path.join(os.path.dirname(__file__), os.path.join('data'))
-us_canada_user_rating_pivot = pd.read_csv(base_loc+"\\us_canada_user_rating_pivot.csv")
+us_canada_user_rating_pivot = pd.read_csv(base_loc+"/us_canada_user_rating_pivot.csv")
 us_canada_user_rating_pivot_idx = us_canada_user_rating_pivot.set_index("bookTitle")
-return_data_csv=pd.read_csv(base_loc+"\\Book_details_filtered_us_canada.csv")
+return_data_csv=pd.read_csv(base_loc+"/Book_details_filtered_us_canada.csv")
 # print(us_canada_user_rating_pivot.head())
 model_loc = os.path.join(os.path.dirname(__file__), os.path.join('models')) 
 # pd.DataFrame(us_canada_user_rating_pivot["bookTitle"]).to_csv(base_loc+"\\popular_usa_books.csv")
@@ -27,12 +27,12 @@ titles=us_canada_user_rating_pivot["bookTitle"].str.lower()
 def load_model():
     loaded_model = None
     try:
-        with open(model_loc+'\\knnpickle_file', 'rb') as knnPickle:
+        with open(model_loc+'/knnpickle_file', 'rb') as knnPickle:
             loaded_model = pickle.load(knnPickle)
         print("loaded model (1)")
     except:
         try:
-            loaded_model = joblib.load( model_loc+'\\model_knn.pkl' , mmap_mode ='r')
+            loaded_model = joblib.load( model_loc+'/model_knn.pkl' , mmap_mode ='r')
             print("loaded model (2)")
         except:
             print("\nUnable to load model :(\n")
