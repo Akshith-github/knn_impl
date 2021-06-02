@@ -1,0 +1,1 @@
+C:\Users\akshi\Desktop\ibm_prjct\knn_impl\rcmndenv\Scripts\activate.bat

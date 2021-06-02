@@ -23,6 +23,8 @@ return_data_csv=pd.read_csv(base_loc+"/Book_details_filtered_us_canada.csv")
 model_loc = os.path.join(os.path.dirname(__file__), os.path.join('models')) 
 # pd.DataFrame(us_canada_user_rating_pivot["bookTitle"]).to_csv(base_loc+"\\popular_usa_books.csv")
 titles=us_canada_user_rating_pivot["bookTitle"].str.lower()
+isbns=return_data_csv["ISBN"].apply(lambda x: str(x).lower())
+print(us_canada_user_rating_pivot.columns)
 #load model
 def load_model():
     loaded_model = None
@@ -67,10 +69,20 @@ def run_random_recommend(n_neighbors,query_index=-1):
     # print(a)
     return a
 
+def recommend_for_book_isbn(isbn:str,n_neighbors=6):
+    isbn_idx = isbns[isbns==isbn.lower()]
+    print(isbn_idx.shape[0])
+    query_index = -1  if(not isbn_idx.shape[0]) else int(isbn_idx.index.values[0])
+    print(isbn_idx.shape)
+    return run_random_recommend(n_neighbors,query_index)
+
 
 def recommend_for_book(book_name:str,n_neighbors=6):
     title_idx = titles[titles==book_name.lower()]
-    query_index = -1  if(not title_idx.shape[0]) else int(title_idx.index.values)
+    print(title_idx.shape[0])
+    # if(title_idx.shape[0]>1):
+    #     title_idx = title_idx.iloc[0]
+    query_index = -1  if(not title_idx.shape[0]) else int(title_idx.index.values[0])
     # print(title_idx.shape)
     return run_random_recommend(n_neighbors,query_index)
     

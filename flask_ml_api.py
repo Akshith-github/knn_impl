@@ -19,8 +19,14 @@ def send_recommend():
         n=10
     if 'book_name' in request.args:
         book_name = request.args['book_name']
+        print(book_name)
         from load_model_and_recommend import recommend_for_book
         l=recommend_for_book(book_name,n_neighbors=n)
+    elif 'isbn' in request.args:
+        isbn_no = request.args['isbn']
+        print(isbn_no)
+        from load_model_and_recommend import recommend_for_book_isbn
+        l=recommend_for_book_isbn(isbn_no,n_neighbors=n)
     else:
         from load_model_and_recommend import run_random_recommend
         l=run_random_recommend(n)
